@@ -26,7 +26,7 @@ import javax.swing.JPanel;
 public class Canvas extends JPanel{
     
     private ArrayList<Observer> observers;
-    protected final static String imgPath = "img/fundohd.jpg";
+    protected final static String imgPath = "img/cima.jpg";
     protected static BufferedImage pecasImg = null;    
 
     public Canvas() {
@@ -61,7 +61,7 @@ public class Canvas extends JPanel{
             }
         }
         
-        g.drawImage(pecasImg, 0, 0, 1280, 720, null);
+        g.drawImage(pecasImg, 0, 0, 1292, 553, null);
         
         
         //g.setBackground(Color.RED);

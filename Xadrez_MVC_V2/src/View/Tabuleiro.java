@@ -22,6 +22,8 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 /**
@@ -34,10 +36,15 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
   private Canvas canvas;  
   private Point mouseCoord;
   private ModelTabuleiro model;
+ // private JLabel JLabel1;
+  
   //private JPanel CanvasD;//atributo com a janela de desenho
   
   /** Creates new form tabuleiro */
   public Tabuleiro(ModelTabuleiro model) {
+      
+      
+      
     initComponents();
     canvas = new Canvas();
     mouseCoord = new Point();
@@ -49,6 +56,55 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
     canvas.setPreferredSize(area);//set dimensao do painel de desenho
     jPCanvas.setLayout(new FlowLayout());
     jPCanvas.add(canvas);  
+    
+    Color minhaCor = new Color(40, 40, 40); //pintando o fundo da cor preta 
+    
+    this.getContentPane().setBackground(minhaCor);
+    
+    //adicionando os botões sobre o panel que apresenta a parte de baixo do fundo
+    
+    //botão 1
+    
+    ImageIcon imgButton = new ImageIcon("img/nave.pNg");
+    JButton button_nave1 = new JButton(imgButton);  
+    button_nave1.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(255, 242, 0), 3)); //cor amarela ao redor do botão
+    jLabel1.add(button_nave1); 
+    button_nave1.setBounds(420, 30, 106, 94);  
+    
+    //botão 2
+    
+    
+    JButton button_nave2 = new JButton(imgButton);  
+    button_nave2.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(255, 242, 0), 3)); //cor amarela ao redor do botão
+    jLabel1.add(button_nave2); 
+    button_nave2.setBounds(560, 30, 106, 94); 
+    
+     //botão 3
+     
+    
+    JButton button_nave3 = new JButton(imgButton);  
+    button_nave3.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(255, 242, 0), 3)); //cor amarela ao redor do botão
+    jLabel1.add(button_nave3); 
+    button_nave3.setBounds(700, 30, 106, 94); 
+    
+    
+    //Adicionando os labels com as coordenadas do mouse sobre o panel
+    
+    jLabel1.add(jLabel2);
+    jLabel2.setBounds(4, 130, 74, 16); 
+    
+    jLabel1.add(coordenadaLabel);
+    coordenadaLabel.setBounds(78, 130, 540, 16); 
+    
+    jLabel1.add(jLabel3);
+    jLabel3.setBounds(4, 146, 91, 16);
+    
+    jLabel1.add(clickLabel);
+    clickLabel.setBounds(96, 146, 540, 16); 
+     
+     
+    
+    
     
   }
 
@@ -129,13 +185,16 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
     private void initComponents() {
 
         jPCanvas = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         coordenadaLabel = new javax.swing.JLabel();
         clickLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("SCC0204 - Xadrez");
+        setTitle("SCC0204 - Battle Space");
+        setBackground(new java.awt.Color(51, 255, 51));
+        setPreferredSize(new java.awt.Dimension(1292, 776));
         setResizable(false);
 
         jPCanvas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -147,55 +206,60 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
         jPCanvas.setLayout(jPCanvasLayout);
         jPCanvasLayout.setHorizontalGroup(
             jPCanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1276, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPCanvasLayout.setVerticalGroup(
             jPCanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 716, Short.MAX_VALUE)
+            .addGap(0, 554, Short.MAX_VALUE)
         );
 
-        jLabel2.setText("Coordenada:");
+        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Click do mouse:");
 
-        jLabel3.setText("click:");
-
+        coordenadaLabel.setBackground(new java.awt.Color(0, 0, 0));
+        coordenadaLabel.setForeground(new java.awt.Color(255, 255, 255));
         coordenadaLabel.setText(" ");
 
+        clickLabel.setBackground(new java.awt.Color(0, 0, 0));
+        clickLabel.setForeground(new java.awt.Color(255, 255, 255));
         clickLabel.setText(" ");
+
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Coordenada:");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\willi\\Desktop\\editando imagem\\baixo.png")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPCanvas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(coordenadaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(210, 210, 210))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(clickLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(246, 246, 246))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(coordenadaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(clickLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPCanvas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1292, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPCanvas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPCanvas, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(coordenadaLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(clickLabel)))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(coordenadaLabel)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(clickLabel))
+                    .addComponent(jLabel2)))
         );
 
         pack();
@@ -203,6 +267,7 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel clickLabel;
     private javax.swing.JLabel coordenadaLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPCanvas;

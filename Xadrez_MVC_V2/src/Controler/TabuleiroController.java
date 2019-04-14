@@ -8,6 +8,8 @@ import Model.ModelTabuleiro;
 import View.Tabuleiro;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -17,7 +19,7 @@ import java.awt.event.MouseMotionListener;
  *
  * @author felipelageduarte
  */
-public class TabuleiroController implements  MouseListener, MouseMotionListener{
+public class TabuleiroController implements  MouseListener, MouseMotionListener, ActionListener{
 
   private Tabuleiro view;
   private ModelTabuleiro model;
@@ -72,11 +74,14 @@ public class TabuleiroController implements  MouseListener, MouseMotionListener{
             view.getClickLabel().setText("x:"+x+"  y:"+y+"   -   Quadrante: ["+teste1+","+teste2+"]");
         }
         
-    
         
-       
+      //torna invisivel as labels de atributo depois de um clique no tabuleiro  
         
-        
+      view.getjLabel4().setVisible(false);
+      view.getjLabel5().setVisible(false);
+      view.getjLabel6().setVisible(false);
+      
+      
     }
 
     @Override
@@ -126,5 +131,30 @@ public class TabuleiroController implements  MouseListener, MouseMotionListener{
         view.getMouseCoord().setLocation(x, y);
         view.repaint();
     }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        
+        
+       //verifica de onde veio o evento pressionar botão e torna visivel os atributos da nave escolhida
+      if(ae.getSource() == view.getbutton_nave1()){
+           view.getjLabel5().setVisible(true);
+      }
+      
+       if(ae.getSource() == view.getbutton_nave2()){
+           view.getjLabel6().setVisible(true);
+      }
+       
+       if(ae.getSource() == view.getbutton_nave3()){
+           view.getjLabel4().setVisible(true);
+      }
+      
+      
+    }
+
+    
+    
+    
+    
 
 }

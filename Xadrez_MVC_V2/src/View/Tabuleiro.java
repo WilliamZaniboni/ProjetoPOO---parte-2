@@ -10,6 +10,7 @@
  */
 package View;
 
+
 import Controler.TabuleiroController;
 import Model.ModelTabuleiro;
 import java.awt.BasicStroke;
@@ -40,15 +41,8 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
   private JButton button_nave2;
   private JButton button_nave3;
   
-  
- // private JLabel JLabel1;
-  
-  //private JPanel CanvasD;//atributo com a janela de desenho
-  
-  /** Creates new form tabuleiro */
+ 
   public Tabuleiro(ModelTabuleiro model) {
-      
-      
       
     initComponents();
     canvas = new Canvas();
@@ -70,29 +64,36 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
     
     //botão 1
     
-    ImageIcon imgButton = new ImageIcon("img/nave.pNg");
-    button_nave1 = new JButton(imgButton);  
-    button_nave1.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(255, 242, 0), 3)); //cor amarela ao redor do botão
+    ImageIcon imgButton = new ImageIcon("img/nave.png");
+    Color cor_transparente  = new Color(100,100,100,100);
+    button_nave1 = new JButton(imgButton);
+    //button_nave1.setBackground(minhaCor);
+    button_nave1.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(79, 206, 234), 3)); //cor ao redor do botão
     jLabel1.add(button_nave1); 
     button_nave1.setBounds(560, 30, 106, 94);  
     
+    button_nave1.setToolTipText("NAVE1 - COLOCAR CARACTERISTICAS AQUI "); //janela de texto que aparece quando passa o mouse sobre o botão
+    
     //botão 2
-    
-    
+  
     button_nave2 = new JButton(imgButton);  
-    button_nave2.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(255, 242, 0), 3)); //cor amarela ao redor do botão
+    button_nave2.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(79, 206, 234), 3)); //cor amarela ao redor do botão
     jLabel1.add(button_nave2); 
+    //button_nave2.setBackground(cor_transparente);
     button_nave2.setBounds(700, 30, 106, 94); 
+    button_nave2.setToolTipText("NAVE2 - COLOCAR CARACTERISTICAS AQUI "); //janela de texto que aparece quando passa o mouse sobre o botão
     
      //botão 3
      
-    
     button_nave3 = new JButton(imgButton);  
-    button_nave3.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(255, 242, 0), 3)); //cor amarela ao redor do botão
+    button_nave3.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(79, 206, 234), 3)); //cor amarela ao redor do botão
     jLabel1.add(button_nave3); 
+    // button_nave3.setBackground(cor_transparente);
     button_nave3.setBounds(840, 30, 106, 94); 
+    button_nave3.setToolTipText("NAVE3 - COLOCAR CARACTERISTICAS AQUI" ); //janela de texto que aparece quando passa o mouse sobre o botão
     
-    
+    /////////////////
+ 
     //Adicionando os labels com as coordenadas do mouse sobre o panel
     
     jLabel1.add(jLabel2);
@@ -106,39 +107,75 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
     
     jLabel1.add(clickLabel);
     clickLabel.setBounds(96, 146, 540, 16); 
-     
+    
+    
+    
+    //Adicionando os labels que apresentam os atributos e deixando set visible false
+    
+    jLabel1.add(jLabel4);
+    jLabel4.setBounds(300, 30, 212, 110); 
+    jLabel4.setVisible(false);
+    
+    jLabel1.add(jLabel5);
+    jLabel5.setBounds(300, 30, 212, 110); 
+    jLabel5.setVisible(false);
+    
+    jLabel1.add(jLabel6);
+    jLabel6.setBounds(300, 30, 212, 110); 
+    jLabel6.setVisible(false);
+    
   }
   
-  //getters e setters dos botões
+  public void addController(TabuleiroController controller){
+        jPCanvas.addMouseListener(controller);
+        jPCanvas.addMouseMotionListener(controller);
+        button_nave1.addActionListener(controller);
+        button_nave2.addActionListener(controller);
+        button_nave3.addActionListener(controller);
+    }
+ 
+    
+    //adicionando os getters dos botões
 
-    public JButton getButton_nave1() {
+   public JButton getbutton_nave1(){
         return button_nave1;
     }
-
-    public void setButton_nave1(JButton button_nave1) {
-        this.button_nave1 = button_nave1;
-    }
-
-    public JButton getButton_nave2() {
+   
+   public JButton getbutton_nave2(){
         return button_nave2;
     }
-
-    public void setButton_nave2(JButton button_nave2) {
-        this.button_nave2 = button_nave2;
-    }
-
-    public JButton getButton_nave3() {
+   
+   
+   public JButton getbutton_nave3(){
         return button_nave3;
     }
-
-    public void setButton_nave3(JButton button_nave3) {
-        this.button_nave3 = button_nave3;
+  
+  //adicionando os getters e setters dos labels com atributos
+  
+    public JLabel getjLabel4() {
+        return jLabel4;
     }
-  
-   /////////////////
-  
-  
+    
+    public void setjLabel4(JLabel jLabel4) {
+        this.jLabel4 = jLabel4;
+    }
+    
+    public JLabel getjLabel5() {
+        return jLabel5;
+    }
 
+    public void setjLabel5(JLabel jLabel5) {
+        this.jLabel5 = jLabel5;
+    }
+    
+    public JLabel getjLabel6() {
+        return jLabel6;
+    }
+
+    public void setjLabel6(JLabel jLabel6) {
+        this.jLabel6 = jLabel6;
+    }
+    
     public Point getMouseCoord() {
         return mouseCoord;
     }
@@ -163,12 +200,6 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
         this.coordenadaLabel = coordenadaLabel;
     }
 
-    
-    public void addController(TabuleiroController controller){
-        jPCanvas.addMouseListener(controller);
-        jPCanvas.addMouseMotionListener(controller);
-    }
-  
  public void drawMouseQuadrante(Graphics2D g) { //desenhando um quadrado em volta do quadrante
         
         int width = canvas.getWidth()/8;
@@ -322,7 +353,10 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
         coordenadaLabel = new javax.swing.JLabel();
         clickLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SCC0204 - Battle Space");
@@ -362,13 +396,21 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Coordenada:");
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/atributos_nave3.png"))); // NOI18N
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/baixo.png"))); // NOI18N
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/atributos_nave1.png"))); // NOI18N
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/atributos_nave2.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPCanvas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1292, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -377,8 +419,20 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(clickLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPCanvas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1292, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(378, 378, 378))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(190, 190, 190)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(890, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(437, 437, 437)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(643, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,7 +446,20 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
                         .addComponent(clickLabel))
-                    .addComponent(jLabel2)))
+                    .addComponent(jLabel2))
+                .addGap(27, 27, 27)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(769, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(64, 64, 64)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(780, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(53, 53, 53)))
         );
 
         pack();
@@ -403,6 +470,9 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPCanvas;
     // End of variables declaration//GEN-END:variables
 

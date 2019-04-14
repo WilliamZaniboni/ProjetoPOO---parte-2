@@ -19,10 +19,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-/**
- *
- * @author jbatista
- */
+
 public class Canvas extends JPanel{
     
     private ArrayList<Observer> observers;
@@ -38,17 +35,6 @@ public class Canvas extends JPanel{
         this.observers.add(ob);
     }
     
-    private void desenhaTabuleiro(Graphics g) {
-    Graphics2D g2d = (Graphics2D) g;
-    // 64 é o numedo de quadrantes de um tabuleiro de xadrez
-        for (int i = 0; i < 8; i++) {
-          for (int j = 0; j < 8; j++) {        
-            if ((j+i) % 2 == 0) g2d.setColor(Color.BLACK);
-            else g2d.setColor(Color.WHITE);
-            g2d.fillRect(j * 60, i*60, 60, 60);
-          }
-        }
-    }
     
     private void drawBoard(Graphics2D g){
         
@@ -63,35 +49,7 @@ public class Canvas extends JPanel{
         
         g.drawImage(pecasImg, 0, 0, 1292, 553, null);
         
-        
-        //g.setBackground(Color.RED);
-        
-        
-        
-        
-        /*
-        g.setBackground(Color.WHITE);
-        g.setColor(Color.GRAY);
-                 
-        float maxWidth=this.getWidth()+4;
-        float maxHeight=this.getHeight()+4;
-        //System.out.println(maxWidth + "  " + maxHeight);
-        float boardSize = (maxWidth < maxHeight) ? maxWidth : maxHeight;
-        int spotSize = Math.round(boardSize/8.0f);
-        for(int i = 0; i<8; ++i){
-            for(int j = 0; j<8; ++j){
-                //varia a cor do quadrante
-                if(g.getColor() == Color.WHITE) g.setColor(Color.GRAY);
-                else g.setColor(Color.WHITE);
-
-                //Desenha o tabuleiro
-                g.fillRect(i*spotSize,j*spotSize,spotSize, spotSize);
-            }
-
-            if(g.getColor() == Color.WHITE) g.setColor(Color.GRAY);
-            else g.setColor(Color.WHITE);
-        }
-*/
+       
     }
     
     

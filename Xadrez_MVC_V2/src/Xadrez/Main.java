@@ -4,6 +4,7 @@
  */
 package Xadrez;
 
+
 import Controler.TabuleiroController;
 import Model.ModelTabuleiro;
 import View.Tabuleiro;
@@ -27,6 +28,7 @@ public class Main {
         // Cria o Controller do TAbuleiro.... todos eventos tratados aqui..
         TabuleiroController tabuleiroController = new TabuleiroController(); 
         
+        
         /*
         Se o seu projeto tivesse um MODEL, ou seja, um 'modulo de dados'
         entao seria a hora de cria-lo aqui... */
@@ -49,6 +51,7 @@ public class Main {
         
         // define o tratamento de eventos dos atributos do view para o controller
         viewTabuleiro.addController(tabuleiroController);
+        
         // associa o view ao seu repectivo controller
         tabuleiroController.addView(viewTabuleiro);
         //tabuleiroController.addModel(modelTabuleiro);

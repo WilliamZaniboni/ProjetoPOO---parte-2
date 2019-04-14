@@ -82,6 +82,11 @@ public class TabuleiroController implements  MouseListener, MouseMotionListener,
       view.getjLabel6().setVisible(false);
       
       
+      view.setClickButton1(false);
+      view.setClickButton2(false);
+      view.setClickButton3(false);
+      
+      
     }
 
     @Override
@@ -139,14 +144,17 @@ public class TabuleiroController implements  MouseListener, MouseMotionListener,
        //verifica de onde veio o evento pressionar botão e torna visivel os atributos da nave escolhida
       if(ae.getSource() == view.getbutton_nave1()){
            view.getjLabel5().setVisible(true);
+           view.setClickButton1(true);
       }
       
        if(ae.getSource() == view.getbutton_nave2()){
            view.getjLabel6().setVisible(true);
+           view.setClickButton2(true);
       }
        
        if(ae.getSource() == view.getbutton_nave3()){
            view.getjLabel4().setVisible(true);
+           view.setClickButton3(true);
       }
       
       

@@ -20,6 +20,7 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Point;
 import java.util.Observable;
 import java.util.Observer;
@@ -134,7 +135,6 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
         button_nave3.addActionListener(controller);
     }
  
-    
     //adicionando os getters dos botões
 
    public JButton getbutton_nave1(){
@@ -199,6 +199,40 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
     public void setCoordenadaLabel(JLabel coordenadaLabel) {
         this.coordenadaLabel = coordenadaLabel;
     }
+    
+    
+    //variaveis para verificar se o botão foi pressionado e printar (metodo drawMouseQuadrante) o png da nave selecionada na posição do  mouse
+    
+    boolean k = false;
+    
+    public void setClickButton1(boolean i){
+      k=i;   
+    }
+    
+    public boolean getClickButton1(){
+        return k;
+    }
+    
+    boolean l = false;
+    
+    public void setClickButton2(boolean i){
+      l=i;   
+    }
+    
+    public boolean getClickButton2(){
+        return l;
+    }
+    
+    boolean j = false;
+    
+    public void setClickButton3(boolean i){
+      j=i;   
+    }
+    
+    public boolean getClickButton3(){
+        return j;
+    }
+    
 
  public void drawMouseQuadrante(Graphics2D g) { //desenhando um quadrado em volta do quadrante
         
@@ -318,6 +352,34 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
         */
         
         
+        //adicionando o png ao mouse apos clicar no botão 
+        
+        if(this.getClickButton1() == true){
+        
+        ImageIcon referencia  = new ImageIcon("img/navehd.png");
+        Image nave = referencia.getImage();
+        
+        g.drawImage(nave,mouseCoord.x, mouseCoord.y, this);
+        
+        }
+        
+        if(this.getClickButton2() == true){
+        
+        ImageIcon referencia  = new ImageIcon("img/navehd.png");
+        Image nave = referencia.getImage();
+        
+        g.drawImage(nave,mouseCoord.x, mouseCoord.y, this);
+        
+        }
+        
+        if(this.getClickButton3() == true){
+        
+        ImageIcon referencia  = new ImageIcon("img/navehd.png");
+        Image nave = referencia.getImage();
+        
+        g.drawImage(nave,mouseCoord.x, mouseCoord.y, this);
+        
+        }
         
         
         

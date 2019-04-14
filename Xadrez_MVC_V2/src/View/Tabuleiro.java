@@ -36,6 +36,11 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
   private Canvas canvas;  
   private Point mouseCoord;
   private ModelTabuleiro model;
+  private JButton button_nave1;
+  private JButton button_nave2;
+  private JButton button_nave3;
+  
+  
  // private JLabel JLabel1;
   
   //private JPanel CanvasD;//atributo com a janela de desenho
@@ -66,26 +71,26 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
     //botão 1
     
     ImageIcon imgButton = new ImageIcon("img/nave.pNg");
-    JButton button_nave1 = new JButton(imgButton);  
+    button_nave1 = new JButton(imgButton);  
     button_nave1.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(255, 242, 0), 3)); //cor amarela ao redor do botão
     jLabel1.add(button_nave1); 
-    button_nave1.setBounds(420, 30, 106, 94);  
+    button_nave1.setBounds(560, 30, 106, 94);  
     
     //botão 2
     
     
-    JButton button_nave2 = new JButton(imgButton);  
+    button_nave2 = new JButton(imgButton);  
     button_nave2.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(255, 242, 0), 3)); //cor amarela ao redor do botão
     jLabel1.add(button_nave2); 
-    button_nave2.setBounds(560, 30, 106, 94); 
+    button_nave2.setBounds(700, 30, 106, 94); 
     
      //botão 3
      
     
-    JButton button_nave3 = new JButton(imgButton);  
+    button_nave3 = new JButton(imgButton);  
     button_nave3.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(255, 242, 0), 3)); //cor amarela ao redor do botão
     jLabel1.add(button_nave3); 
-    button_nave3.setBounds(700, 30, 106, 94); 
+    button_nave3.setBounds(840, 30, 106, 94); 
     
     
     //Adicionando os labels com as coordenadas do mouse sobre o panel
@@ -102,11 +107,37 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
     jLabel1.add(clickLabel);
     clickLabel.setBounds(96, 146, 540, 16); 
      
-     
-    
-    
-    
   }
+  
+  //getters e setters dos botões
+
+    public JButton getButton_nave1() {
+        return button_nave1;
+    }
+
+    public void setButton_nave1(JButton button_nave1) {
+        this.button_nave1 = button_nave1;
+    }
+
+    public JButton getButton_nave2() {
+        return button_nave2;
+    }
+
+    public void setButton_nave2(JButton button_nave2) {
+        this.button_nave2 = button_nave2;
+    }
+
+    public JButton getButton_nave3() {
+        return button_nave3;
+    }
+
+    public void setButton_nave3(JButton button_nave3) {
+        this.button_nave3 = button_nave3;
+    }
+  
+   /////////////////
+  
+  
 
     public Point getMouseCoord() {
         return mouseCoord;
@@ -138,41 +169,143 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
         jPCanvas.addMouseMotionListener(controller);
     }
   
- public void drawMouseQuadrante(Graphics2D g) {
+ public void drawMouseQuadrante(Graphics2D g) { //desenhando um quadrado em volta do quadrante
         
         int width = canvas.getWidth()/8;
         int height = canvas.getHeight()/8;
         
-        int teste1 = mouseCoord.x - 327;
-        int teste2 = mouseCoord.y - 94; 
+        int pmousex = mouseCoord.x - 327;
+        int pmousey = mouseCoord.y - 94; 
         
-        //System.out.println("p = " + teste1);
+        int qx = pmousex/54;
+        int qy = pmousey/54;
         
-        int qx = teste1/54;
-        int qy = teste2/54;
-        //System.out.println(qx + "   " + qy);
-        
-       // int squareWidth = g.getClip().getBounds().width / 8;
-       // int squareHeight = g.getClip().getBounds().height / 8;
        
         int squareWidth = 54;
         int squareHeight = 54;
-        
-        
-       // squareWidth++; // gambiarra 1
-       // squareHeight++;  // gambiarra 2
-
-        //System.out.println(squareWidth + "   " + squareHeight);
-        
+       
         if((mouseCoord.x>=327) && (mouseCoord.x<=1135) && (mouseCoord.y<=517) && (mouseCoord.y>=88)){
+            
+       // desenha um quadrado amarelo se o quadrante esta vazio - ainda não esta verificando se o quadrante esta ocupado    
         
         g.setColor(Color.yellow);
         g.setStroke(new BasicStroke(2));
         g.drawRect(qx * squareWidth+327, qy * squareHeight+87, squareWidth, squareHeight);
         g.setColor(Color.BLACK);
         
+        //quadrantes de ataque // colocar um verificador para ver se o quadrante esta ocupado e o tipo de objeto que esta ocupando ele
+        
+        //et1 //ataques horizontais apenas para a esquerda (linha 202 até 211)
+        
+        /*
+        
+        for(int i=0; i<15; i++){
+            
+        if((qx * squareWidth+327-54*i)>=327){    
+        g.setColor(Color.red);
+        g.setStroke(new BasicStroke(2));
+        g.drawRect(qx * squareWidth+327-54*i, qy * squareHeight+87, squareWidth, squareHeight);
+        g.setColor(Color.BLACK);
         }
-    }   
+        
+        }
+        
+        */
+        
+        //ataques em um raio de r quadrantes  (linha 217 até 284)
+        
+        
+        /*
+        int r=3;
+        int constante =0;
+        
+        for(int j=r;j>-1;j--){
+            
+        if((qx * squareWidth+327-54*j>=327) ){
+            
+           for(int k = 0; k<constante+1; k++){
+            
+          if((qy * squareHeight+87+k*54<=517)){
+              
+            g.setColor(Color.red);
+            g.setStroke(new BasicStroke(2));  
+            g.drawRect(qx * squareWidth+327-54*j, qy * squareHeight+87+k*54, squareWidth, squareHeight);
+            g.setColor(Color.BLACK);
+            
+        }  
+          
+          if((qy * squareHeight+87-k*54>=87)){
+              
+            g.setColor(Color.red);
+            g.setStroke(new BasicStroke(2));  
+            g.drawRect(qx * squareWidth+327-54*j, qy * squareHeight+87-k*54, squareWidth, squareHeight);
+            g.setColor(Color.BLACK);
+            
+        }  
+            
+        }
+           
+        }    
+        
+        constante = constante+1;
+        
+        }
+        
+         constante=0;
+        
+        for(int j=r;j>0;j--){
+            
+        if((qx * squareWidth+327+54*j<=1136)){
+            
+           for(int k = 0; k<constante+1; k++){
+            
+          if((qy * squareHeight+87+k*54<=517)){
+              
+            g.setColor(Color.red);
+            g.setStroke(new BasicStroke(2));  
+            g.drawRect(qx * squareWidth+327+54*j, qy * squareHeight+87+k*54, squareWidth, squareHeight);
+            g.setColor(Color.BLACK);
+            
+        }  
+          
+          if((qy * squareHeight+87-k*54>=87)){
+              
+            g.setColor(Color.red);
+            g.setStroke(new BasicStroke(2));  
+            g.drawRect(qx * squareWidth+327+54*j, qy * squareHeight+87-k*54, squareWidth, squareHeight);
+            g.setColor(Color.BLACK);
+            
+        }  
+            
+        }
+           
+        }    
+        
+        constante = constante+1;
+        
+        }
+        */
+        
+        
+        
+        
+        
+        
+        
+        
+        }
+        
+        }
+        
+          
+        
+        
+        
+        
+        
+       
+        
+       
     
     
   /** This method is called from within the constructor to
@@ -229,7 +362,7 @@ public class Tabuleiro extends javax.swing.JFrame implements Observer {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Coordenada:");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\willi\\Desktop\\editando imagem\\baixo.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/baixo.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

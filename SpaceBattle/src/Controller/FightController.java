@@ -69,6 +69,7 @@ public class FightController implements Observer {
                     rebels.add(new RebelSpaceTower(x, y));
                     rebels_number ++;
                     battlefield.setMoveMatrixField(x, y, 1);
+                    battlefield.setOccupiedMatrix(x,y,1);
                     System.out.println("SpaceTower criada em: " + x + ", " + y);
                     return true;
                 }
@@ -83,6 +84,7 @@ public class FightController implements Observer {
                     rebels.add(new RebelStarship(x, y));
                     rebels_number ++;
                     battlefield.setMoveMatrixField(x, y, 1);
+                    battlefield.setOccupiedMatrix(x,y,2);
                     System.out.println("Starshiṕ criada em: " + x + ", " + y);
                     return true;
                 }
@@ -97,6 +99,7 @@ public class FightController implements Observer {
                     rebels.add(new RebelStarbomb(x, y));
                     rebels_number ++;
                     battlefield.setMoveMatrixField(x, y, 1);
+                    battlefield.setOccupiedMatrix(x,y,3);
                     System.out.println("Starbomb criada em: " + x + ", " + y);
                     return true;
                 }
@@ -117,6 +120,16 @@ public class FightController implements Observer {
                     return false;
                 }
             }
+         
+           
+            // retorna o objeto que ocupa determinado quadrante
+            public int getMatrixpreenchida(int x, int y){
+                return battlefield.getOccupiedMatrix(x, y);
+            }
+            
+            
+            
+            
 
         //Métodos de operação durante um ciclo -------------------------------------------------------------------------
             public void moveEmpireShips(){

@@ -60,7 +60,7 @@ public class Environment extends javax.swing.JFrame implements Observer {
             button_SpaceTower = new JButton(imgButton);
             button_SpaceTower.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(79, 206, 234), 3)); //cor ao redor do botão
             jLabel1.add(button_SpaceTower);
-            button_SpaceTower.setBounds(560, 10, 106, 94);  //posição
+            button_SpaceTower.setBounds(560, 0, 106, 94);  //posição
             button_SpaceTower.setToolTipText("SpaceTower"); //janela de texto que aparece quando passa o mouse sobre o botão
     
         //Botão de adição do SpaceIcon Rebelde "Starship" (Botão 2) ------------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ public class Environment extends javax.swing.JFrame implements Observer {
             button_Starship = new JButton(imgButton2);
             button_Starship.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(79, 206, 234), 3)); //cor amarela ao redor do botão
             jLabel1.add(button_Starship);
-            button_Starship.setBounds(700, 10, 106, 94);
+            button_Starship.setBounds(700, 0, 106, 94);
             button_Starship.setToolTipText("Starship"); //janela de texto que aparece quando passa o mouse sobre o botão
     
         //Botão de adição do SpaceIcon Rebelde "Starbomb" (Botão 3) ------------------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ public class Environment extends javax.swing.JFrame implements Observer {
             button_Starbomb = new JButton(imgButton3);
             button_Starbomb.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(79, 206, 234), 3)); //cor amarela ao redor do botão
             jLabel1.add(button_Starbomb);
-            button_Starbomb.setBounds(840, 10, 106, 94);
+            button_Starbomb.setBounds(840, 0, 106, 94);
             button_Starbomb.setToolTipText("StarBomb" ); //janela de texto que aparece quando passa o mouse sobre o botão
 
         //Botão para avanço do ciclo
@@ -87,7 +87,7 @@ public class Environment extends javax.swing.JFrame implements Observer {
             button_next_cycle = new JButton(imgButton_next );
             button_next_cycle.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(79, 206, 234), 3)); //cor amarela ao redor do botão
             jLabel1.add(button_next_cycle);
-            button_next_cycle.setBounds(120, 10, 94, 94);
+            button_next_cycle.setBounds(120, 0, 94, 94);
             button_next_cycle.setToolTipText("Avançar ciclo" ); //janela de texto que aparece quando passa o mouse sobre o botão
 
 
@@ -108,24 +108,24 @@ public class Environment extends javax.swing.JFrame implements Observer {
         //Adição das Labels de escolha de Rebelde (Informações adicionais sobre o SpaceIcon Rebelde) =======================
     
             jLabel1.add(jLabel4); //atributos da nave 3
-            jLabel4.setBounds(300, 10, 212, 110);
+            jLabel4.setBounds(300, 0, 212, 110);
             jLabel4.setVisible(false);
     
             jLabel1.add(jLabel5); //atributos da nave 1
-            jLabel5.setBounds(300, 10, 212, 110);
+            jLabel5.setBounds(300, 0, 212, 110);
             jLabel5.setVisible(false);
     
             jLabel1.add(jLabel6); //atributos da nave 2
-            jLabel6.setBounds(300, 10, 212, 110);
+            jLabel6.setBounds(300, 0, 212, 110);
             jLabel6.setVisible(false);
             
          //Adição das Labels com a quantidade de moeda
           
             jLabel1.add(jLabel7); //desenho da moeda
-            jLabel7.setBounds(710, 123, 40, 40);
+            jLabel7.setBounds(710, 113, 40, 40);
             
             jLabel1.add(jLabel8); //quantidade de moeda
-            jLabel8.setBounds(760, 123, 40, 40);
+            jLabel8.setBounds(760, 113, 100, 40);
             jLabel8.setText("100");
             
          //Label para informar o ciclo
@@ -135,7 +135,7 @@ public class Environment extends javax.swing.JFrame implements Observer {
             jLabel9.setText("1º");
             
             jLabel1.add(jLabel10); //label para informar o ciclo
-            jLabel10.setBounds(30, 50, 60, 60);
+            jLabel10.setBounds(30, 50, 100, 60);
             jLabel10.setText("CICLO");
             
     }
@@ -277,96 +277,150 @@ public class Environment extends javax.swing.JFrame implements Observer {
        
         if((mouseCoord.x>=327) && (mouseCoord.x<=1135) && (mouseCoord.y<=517) && (mouseCoord.y>=88)) {
 
-            // desenha um quadrado amarelo se o quadrante esta vazio - ainda não esta verificando se o quadrante esta ocupado
-
-            g.setColor(Color.yellow);
-            g.setStroke(new BasicStroke(2));
-            g.drawRect(qx * squareWidth + 327, qy * squareHeight + 87, squareWidth, squareHeight);
-            g.setColor(Color.BLACK);
-
-            
-            //quadrantes de ataque // colocar um verificador para ver se o quadrante esta ocupado e o tipo de objeto que esta ocupando ele
-
-            //et1 //ataques horizontais apenas para a esquerda (linha 202 até 211)
-        
-            /*
-        
-            for(int i=0; i<15; i++){
-            
-                if((qx * squareWidth+327-54*i)>=327){
-                    g.setColor(Color.red);
+            switch (fightController.getMatrixpreenchida(qx, qy)) {
+                case 0: //Quadrante vazio 
+ 
+                    g.setColor(Color.yellow);
                     g.setStroke(new BasicStroke(2));
-                    g.drawRect(qx * squareWidth+327-54*i, qy * squareHeight+87, squareWidth, squareHeight);
+                    g.drawRect(qx * squareWidth + 327, qy * squareHeight + 87, squareWidth, squareHeight);
                     g.setColor(Color.BLACK);
-                }
-            }
-        
-            */
+                    break;
+            
+                case 1: //SpaceTower
+                    
+                    for(int i=0; i<8; i++){
+                        
+                        if((qy * squareHeight + 87-54*i)>=87){
+                            g.setColor(Color.red);
+                            g.setStroke(new BasicStroke(2));
+                            g.drawRect(qx * squareWidth+327, qy * squareHeight+87-54*i, squareWidth, squareHeight);
+                            g.setColor(Color.BLACK);
+                        }
+                         
+                    }      
+                    
+                    for(int i=0; i<8; i++){
+                        
+                        if((qy * squareHeight + 87+54*i)<=517){
+                            g.setColor(Color.red);
+                            g.setStroke(new BasicStroke(2));
+                            g.drawRect(qx * squareWidth+327, qy * squareHeight+87+54*i, squareWidth, squareHeight);
+                            g.setColor(Color.BLACK);
+                        }
+                         
+                    }    
+                    
+                    break;
+                    
+                case 2: //StarShip
+                    
+                    for(int i=0; i<8; i++){
+                        
+                        if((qy * squareHeight + 87-54*i)>=87){
+                            g.setColor(Color.red);
+                            g.setStroke(new BasicStroke(2));
+                            g.drawRect(qx * squareWidth+327, qy * squareHeight+87-54*i, squareWidth, squareHeight);
+                            g.setColor(Color.BLACK);
+                        }
+                         
+                    }      
+                    
+                    for(int i=0; i<8; i++){
+                        
+                        if((qy * squareHeight + 87+54*i)<=517){
+                            g.setColor(Color.red);
+                            g.setStroke(new BasicStroke(2));
+                            g.drawRect(qx * squareWidth+327, qy * squareHeight+87+54*i, squareWidth, squareHeight);
+                            g.setColor(Color.BLACK);
+                        }
+                         
+                    }    
+                    
+                    
+                    for(int i=0; i<15; i++){
+                        if((qx * squareWidth+327+54*i)<=1135){
+                            g.setColor(Color.red);
+                            g.setStroke(new BasicStroke(2));
+                            g.drawRect(qx * squareWidth+327+54*i, qy * squareHeight+87, squareWidth, squareHeight);
+                            g.setColor(Color.BLACK);
+                         }
+                     }
+                    
+                    break;
+                    
+                case 3: //StarBomb
 
-            //ataques em um raio de r quadrantes  (linha 265 até 334)
+                    int r=3;
+                    int constante =0;
         
+                    for(int j=r;j>-1;j--){
+                       if((qx * squareWidth+327-54*j>=327) ){
+                           for(int k = 0; k<constante+1; k++){
+                               if((qy * squareHeight+87+k*54<=517)){
+                                   g.setColor(Color.red);
+                                   g.setStroke(new BasicStroke(2));
+                                   g.drawRect(qx * squareWidth+327-54*j, qy * squareHeight+87+k*54, squareWidth, squareHeight);
+                                   g.setColor(Color.BLACK);
+                               }
+          
+                               if((qy * squareHeight+87-k*54>=87)){
+                                   g.setColor(Color.red);
+                                   g.setStroke(new BasicStroke(2));
+                                   g.drawRect(qx * squareWidth+327-54*j, qy * squareHeight+87-k*54, squareWidth, squareHeight);
+                                   g.setColor(Color.BLACK);
+                                }
+                            }     
+                        }
+                         constante = constante+1;
+                     }
         
+                    constante=0;
+        
+                    for(int j=r;j>0;j--){
+            
+                        if((qx * squareWidth+327+54*j<=1136)){
+            
+                            for(int k = 0; k<constante+1; k++){
+                                 if((qy * squareHeight+87+k*54<=517)){
+                                   g.setColor(Color.red);
+                                   g.setStroke(new BasicStroke(2));
+                                   g.drawRect(qx * squareWidth+327+54*j, qy * squareHeight+87+k*54, squareWidth, squareHeight);
+                                   g.setColor(Color.BLACK);
+                                  }
+          
+                                 if((qy * squareHeight+87-k*54>=87)){
+                                  g.setColor(Color.red);
+                                  g.setStroke(new BasicStroke(2));
+                                  g.drawRect(qx * squareWidth+327+54*j, qy * squareHeight+87-k*54, squareWidth, squareHeight);
+                                   g.setColor(Color.BLACK);
+                                 }
+                            }
+           
+                           }
+        
+                             constante = constante+1;
+        
+                     }
+           
+                    break;
+                    
+                case 4: //Caso seja um inimigo
+                    //et1 //ataques horizontais apenas para a esquerda (linha 202 até 211)
             /*
-            int r=3;
-            int constante =0;
-        
-            for(int j=r;j>-1;j--){
-                if((qx * squareWidth+327-54*j>=327) ){
-                    for(int k = 0; k<constante+1; k++){
-                        if((qy * squareHeight+87+k*54<=517)){
-                            g.setColor(Color.red);
-                            g.setStroke(new BasicStroke(2));
-                            g.drawRect(qx * squareWidth+327-54*j, qy * squareHeight+87+k*54, squareWidth, squareHeight);
-                            g.setColor(Color.BLACK);
-                        }
-          
-                        if((qy * squareHeight+87-k*54>=87)){
-              
-                            g.setColor(Color.red);
-                            g.setStroke(new BasicStroke(2));
-                            g.drawRect(qx * squareWidth+327-54*j, qy * squareHeight+87-k*54, squareWidth, squareHeight);
-                            g.setColor(Color.BLACK);
-            
-                        }
-            
-                    }
-           
-                }
-                constante = constante+1;
+            for(int i=0; i<15; i++){
+            if((qx * squareWidth+327-54*i)>=327){
+            g.setColor(Color.red);
+            g.setStroke(new BasicStroke(2));
+            g.drawRect(qx * squareWidth+327-54*i, qy * squareHeight+87, squareWidth, squareHeight);
+            g.setColor(Color.BLACK);
+            }
+            }
+             */
+                    
+                default:
+                    break;
             }
         
-            constante=0;
-        
-            for(int j=r;j>0;j--){
-            
-                if((qx * squareWidth+327+54*j<=1136)){
-            
-                    for(int k = 0; k<constante+1; k++){
-            
-                        if((qy * squareHeight+87+k*54<=517)){
-                            g.setColor(Color.red);
-                            g.setStroke(new BasicStroke(2));
-                            g.drawRect(qx * squareWidth+327+54*j, qy * squareHeight+87+k*54, squareWidth, squareHeight);
-                            g.setColor(Color.BLACK);
-                        }
-          
-                        if((qy * squareHeight+87-k*54>=87)){
-                            g.setColor(Color.red);
-                            g.setStroke(new BasicStroke(2));
-                            g.drawRect(qx * squareWidth+327+54*j, qy * squareHeight+87-k*54, squareWidth, squareHeight);
-                            g.setColor(Color.BLACK);
-                        }
-            
-                    }
-           
-                }
-        
-                constante = constante+1;
-        
-            }
-           */
-
-
             //adicionando o png ao mouse apos clicar no botão
 
            if (this.getClickButton1() == true) {
@@ -400,6 +454,7 @@ public class Environment extends javax.swing.JFrame implements Observer {
         
         // desenha os SpaceIcons no battlefield
             for(int i = 0; i < fightController.getRebels_number(); i++){
+                
                 ImageIcon referencia1 = new ImageIcon("img/nave1icone.png");
                 Image nave1 = referencia1.getImage();
                 
@@ -409,13 +464,22 @@ public class Environment extends javax.swing.JFrame implements Observer {
                 ImageIcon referencia3 = new ImageIcon("img/nave3icone.png");
                 Image nave3 = referencia3.getImage();
                 
-                //verificar qual tipo de objeto que é
-                //if nave1
-                //if nave2
-                //if nave3
                 
-                g.drawImage(nave1, squareWidth * fightController.getRebels().get(i).getX() + 327,
+                if(fightController.getMatrixpreenchida(fightController.getRebels().get(i).getX(),fightController.getRebels().get(i).getY())==1){
+                    g.drawImage(nave1, squareWidth * fightController.getRebels().get(i).getX() + 327,
                         squareHeight * fightController.getRebels().get(i).getY() + 87, null);
+                }
+                
+                else if(fightController.getMatrixpreenchida(fightController.getRebels().get(i).getX(),fightController.getRebels().get(i).getY())==2){
+                    g.drawImage(nave2, squareWidth * fightController.getRebels().get(i).getX() + 327,
+                        squareHeight * fightController.getRebels().get(i).getY() + 87, null);
+                }
+                
+                else if(fightController.getMatrixpreenchida(fightController.getRebels().get(i).getX(),fightController.getRebels().get(i).getY())==3){
+                    g.drawImage(nave3, squareWidth * fightController.getRebels().get(i).getX() + 327,
+                        squareHeight * fightController.getRebels().get(i).getY() + 87, null);
+                }
+                
                 
             }
             for(int i = 0; i < fightController.getEmpire_number(); i++){

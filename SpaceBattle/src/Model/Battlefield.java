@@ -7,6 +7,7 @@ public class Battlefield {
 
     private int[][] moveMatrix;
     private int[][] attackMatrix;
+    private int[][] occupiedMatrix;
 
     public Battlefield(int width, int height) {
         this.width = width;
@@ -20,6 +21,18 @@ public class Battlefield {
         */
         moveMatrix = new int [width][height];
         attackMatrix = new int[width][height];
+        
+        /*
+        A matriz occupiedMatrix, contém os tipos de objetos armazenados em cada quadrante.
+        Adotou-se:
+            0 - Posição vazia;
+            1 - SpaceTower;
+            2 - Starhip;
+            3 - StarBomb;
+        */
+        
+        occupiedMatrix = new int [width][height];
+        
     }
 
     //Getters
@@ -55,6 +68,21 @@ public class Battlefield {
     public  void setMoveMatrixField(int x, int y, int value){
         this.moveMatrix[x][y] = value;
     }
+    
+    /////////////////////////////////////////////////////////////////
+    
+    //getters e setters da matriz que armazena o tipo de nave que ocupa o quadrante
+    
+    public  void setOccupiedMatrix(int x, int y, int value){
+        this.occupiedMatrix[x][y] = value;
+    }
+    
+    public int getOccupiedMatrix (int x, int y){
+        return this.occupiedMatrix[x][y];
+    }
+    
+    //////////////////////////////////////////////////////////////////
+    
 
     public void setAttackMatrix(int[][] attackMatrix) {
         this.attackMatrix = attackMatrix;

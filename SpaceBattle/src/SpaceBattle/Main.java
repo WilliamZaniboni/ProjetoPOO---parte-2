@@ -1,6 +1,7 @@
 package SpaceBattle;
 
 import Controller.EnvironmentController;
+import Model.Player;
 import Model.UpdateClass;
 import View.Environment;
 
@@ -13,6 +14,10 @@ public class Main {
           //Cria o Model do Update
           UpdateClass updater = new UpdateClass(); //Interface gráfica
           UpdateClass fight_updater = new UpdateClass();
+          
+          //
+          
+          Player player = new Player();
 
           //Cria o Controller do Environment - os eventos do jogo são tratados e distribuidos aqui
           EnvironmentController environment_controller = new EnvironmentController();

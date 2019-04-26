@@ -37,11 +37,13 @@ public class FightController implements Observer {
         private ArrayList <SpaceIcon> rebels = new ArrayList();
         private ArrayList <SpaceIcon> empire = new ArrayList();
         private Battlefield battlefield;
+        private Player player;
 
 
     //CONSTRUCTOR ======================================================================================================
-        public FightController(Battlefield battlefield) {
+        public FightController(Battlefield battlefield, Player player) {
             this.battlefield = battlefield;
+            this.player = player;
         }
 
 
@@ -70,7 +72,8 @@ public class FightController implements Observer {
                     rebels_number ++;
                     battlefield.setMoveMatrixField(x, y, 1);
                     battlefield.setOccupiedMatrix(x,y,1);
-                    System.out.println("SpaceTower criada em: " + x + ", " + y);
+                    System.out.println("SpaceTower criada em: " + x + ", " + y);          
+                    player.setNewgold(Constants.SPACE_TOWER_GOLD);                   
                     return true;
                 }
                 else{
@@ -86,6 +89,7 @@ public class FightController implements Observer {
                     battlefield.setMoveMatrixField(x, y, 1);
                     battlefield.setOccupiedMatrix(x,y,2);
                     System.out.println("Starshiṕ criada em: " + x + ", " + y);
+                    player.setNewgold(Constants.STARSHIP_GOLD);
                     return true;
                 }
                 else{
@@ -101,6 +105,7 @@ public class FightController implements Observer {
                     battlefield.setMoveMatrixField(x, y, 1);
                     battlefield.setOccupiedMatrix(x,y,3);
                     System.out.println("Starbomb criada em: " + x + ", " + y);
+                    player.setNewgold(Constants.STARBOMB_GOLD);
                     return true;
                 }
                 else{
@@ -127,6 +132,11 @@ public class FightController implements Observer {
                 return battlefield.getOccupiedMatrix(x, y);
             }
             
+            //retorna a quantidade de gold do player
+            
+            public int getGoldPlayer(){
+                return player.getGold();
+            }
             
             
             

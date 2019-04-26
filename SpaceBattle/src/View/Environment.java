@@ -126,16 +126,16 @@ public class Environment extends javax.swing.JFrame implements Observer {
             
             jLabel1.add(jLabel8); //quantidade de moeda
             jLabel8.setBounds(760, 113, 100, 40);
-            jLabel8.setText("100");
+            jLabel8.setText("100 ");
             
          //Label para informar o ciclo
          
             jLabel1.add(jLabel9); //label para informar o ciclo
-            jLabel9.setBounds(30, 10, 60, 60);
+            jLabel9.setBounds(35, 5, 60, 40);
             jLabel9.setText("1º");
             
             jLabel1.add(jLabel10); //label para informar o ciclo
-            jLabel10.setBounds(30, 50, 100, 60);
+            jLabel10.setBounds(30, 40, 100, 60);
             jLabel10.setText("CICLO");
             
     }
@@ -196,6 +196,14 @@ public class Environment extends javax.swing.JFrame implements Observer {
 
     public void setjLabel6(JLabel jLabel6) {
         this.jLabel6 = jLabel6;
+    }
+    
+    public JLabel getjLabel8() {
+        return jLabel8;
+    }
+
+    public void setjLabel8(JLabel jLabel8) {
+        this.jLabel8 = jLabel8;
     }
     
     //Getters e Setters de ações de Mouse ==============================================================================

@@ -14,6 +14,7 @@ import java.util.Observer;
 //Developed codes ======================================================================================================
 import Model.Battlefield;
 import Model.Constants;
+import Model.Player;
 import Model.UpdateClass;
 import View.Environment;
 
@@ -36,7 +37,8 @@ public class EnvironmentController implements MouseListener, MouseMotionListener
     public EnvironmentController() {
         //Constrói a infraestrutura de luta dentro do jogo -------------------------------------------------------------
             battlefield = new Battlefield(Constants.BATTLEFIELD_X_DIM, Constants.BATTLEFIELD_Y_DIM);
-            fightController = new FightController(battlefield);
+            Player player = new Player();
+            fightController = new FightController(battlefield, player);
             this.registerObserver(fightController);
     }
 
@@ -100,6 +102,9 @@ public class EnvironmentController implements MouseListener, MouseMotionListener
                 environment.setClickButton1(false);
                 environment.setClickButton2(false);
                 environment.setClickButton3(false);
+                
+                environment.getjLabel8().setText(""+fightController.getGoldPlayer());
+               
 
                 environment.repaint();
             }

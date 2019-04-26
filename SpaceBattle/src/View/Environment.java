@@ -358,7 +358,7 @@ public class Environment extends javax.swing.JFrame implements Observer {
                     
                 case 3: //StarBomb
 
-                    int r=3;
+                    int r=2;
                     int constante =0;
         
                     for(int j=r;j>-1;j--){

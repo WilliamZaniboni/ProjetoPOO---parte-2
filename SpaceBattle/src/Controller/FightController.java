@@ -67,7 +67,7 @@ public class FightController implements Observer {
             }
         //Inserção de um novo SpaceIcon --------------------------------------------------------------------------------
             public boolean insertNewSpaceTower(int x, int y){
-                if(battlefield.getMoveMatrix()[x][y] == 0){
+                if(battlefield.getMoveMatrix()[x][y] == 0 && player.getGold()>=Constants.SPACE_TOWER_GOLD){
                     rebels.add(new RebelSpaceTower(x, y));
                     rebels_number ++;
                     battlefield.setMoveMatrixField(x, y, 1);
@@ -83,7 +83,7 @@ public class FightController implements Observer {
             }
 
             public boolean insertNewStarship(int x, int y){
-                if(battlefield.getMoveMatrix()[x][y] == 0){
+                if(battlefield.getMoveMatrix()[x][y] == 0 && player.getGold()>= Constants.STARSHIP_GOLD){
                     rebels.add(new RebelStarship(x, y));
                     rebels_number ++;
                     battlefield.setMoveMatrixField(x, y, 1);
@@ -99,7 +99,7 @@ public class FightController implements Observer {
             }
 
             public boolean insertNewStarbomb(int x, int y){
-                if(battlefield.getMoveMatrix()[x][y] == 0){
+                if(battlefield.getMoveMatrix()[x][y] == 0 && player.getGold()>= Constants.STARBOMB_GOLD){
                     rebels.add(new RebelStarbomb(x, y));
                     rebels_number ++;
                     battlefield.setMoveMatrixField(x, y, 1);
@@ -115,7 +115,7 @@ public class FightController implements Observer {
             }
 
             public boolean insertNewEmpireShip(int y){
-                if(battlefield.getMoveMatrix()[Constants.BATTLEFIELD_X_DIM][y] == 0){
+                if(battlefield.getMoveMatrix()[Constants.BATTLEFIELD_X_DIM][y] == 0 ){
                     empire.add(new EmpireShip(y));
                     empire_number ++;
                     battlefield.setMoveMatrixField(Constants.BATTLEFIELD_X_DIM, y, 2);
